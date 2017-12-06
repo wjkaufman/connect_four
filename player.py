@@ -17,7 +17,9 @@ class Player:
             if playerInput == 'q':
                 self.game.stop()
             elif playerInput.isdigit():
-                if self.game.board.play(int(playerInput) - 1, self.id) is not None:
+                try:
+                    self.game.board.play(int(playerInput) - 1, self.id)
+                except:
                     print("Invalid move, please try again")
                     self.play()
             else:

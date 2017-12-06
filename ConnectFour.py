@@ -12,6 +12,7 @@ class Game:
         self.p2 = Player(2, True, self)
         self.status = 0
         self.currPlayer = 1
+        return self.board.get(1)
     
     def switchPlayer(self):
         if self.currPlayer is 1:
@@ -42,20 +43,16 @@ class Game:
             r: the reward for the state/action pair
             s1: the next state of the board
             d: boolean, whether the game is done or not
-            
         """
-        try:
-            self.board.play(col, self.currPlayer)
-            r = (1 if self.currPlayer == self.board.evaluate() else
-                0 if self.board.evaluate() is None else
-                -1)
-            s1 = self.board.get(self.currPlayer)
-            d = True if self.board.evaluate() is not None else False
-            self.switchPlayer()
-            return r, s1, d
-        except ValueError:
-            # do something probably
-            pass
+        # try:
+        self.board.play(col, self.currPlayer)
+        r = (1 if self.currPlayer == self.board.evaluate() else
+            0 if self.board.evaluate() is None else
+            -1)
+        s1 = self.board.get(self.currPlayer)
+        d = True if self.board.evaluate() is not None else False
+        self.switchPlayer()
+        return r, s1, d
     
     def start(self):
         try:
@@ -71,6 +68,7 @@ class Game:
             print('Game is over, but no winner')
         else:
             print("Player {} wins".format(self.board.evaluate()))
+            print(self.board)
     
     def stop(self):
         self.status = -1

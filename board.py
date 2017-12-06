@@ -10,9 +10,9 @@ class Board:
             return self.board
         else:
             inverted = np.copy(self.board)
-            np.place(inverted, inverted == 1, 3)
-            np.place(inverted, inverted == 2, 1)
-            np.place(inverted, inverted == 3, 2)
+            np.place(inverted, inverted == 1, 3) # replace 1's with 3's
+            np.place(inverted, inverted == 2, 1) # replace 2's with 1's
+            np.place(inverted, inverted == 3, 2) # replace 3's with 2's
             return inverted
 
     # play in the nth column, playerID = {1, 2}
@@ -20,11 +20,11 @@ class Board:
     def play(self, n, playerID):
         if n < 0 or n >= self.board.shape[1]:
             raise ValueError('column number is invalid')
-        row = int(min(np.argwhere(np.equal(0, self.board[:, n]))))
-        if row < self.board.shape[0]: # we can put another one in
+        try:
+            row = int(min(np.argwhere(np.equal(0, self.board[:, n]))))
             self.board[row, n] = playerID
             return
-        else:
+        except:
             raise ValueError('column is full, cannot put something there')
 
     # check if a player has won
