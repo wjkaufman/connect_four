@@ -9,7 +9,11 @@ class Board:
         if playerID is 1:
             return self.board
         else:
-            return self.board * -1 + 3
+            inverted = np.copy(self.board)
+            np.place(inverted, inverted == 1, 3)
+            np.place(inverted, inverted == 2, 1)
+            np.place(inverted, inverted == 3, 2)
+            return inverted
 
     # play in the nth column, playerID = {1, 2}
     # errors if it's an invalid move
