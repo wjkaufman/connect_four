@@ -1,4 +1,4 @@
-from Game import *
+from ConnectFour import *
 
 class Player:
     
