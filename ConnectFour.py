@@ -20,13 +20,17 @@ class Game:
         else:
             self.currPlayer = 1
     
-    def getState(self, playerID):
+    def getState(self, playerID = None):
         """
         Get the current board state, but from the perspective of
         the current player. So if it's player 2, then reverse it
         so 1-->2 and 2-->1 (easier to train, more data).
         """
+        playerId = (self.currPlayer if playerID is None else 1)
         return self.board.get(playerID)
+    
+    def isPlayable(self):
+        return not self.board.isFull()
         
     
     def play(self, col):
@@ -41,18 +45,19 @@ class Game:
         
         Returns:
             r: the reward for the state/action pair
-            s1: the next state of the board
+            s1: the next state of the board from the perspective
+                of the player that just went
             d: boolean, whether the game is done or not
         """
         # try:
         self.board.play(col, self.currPlayer)
-        r = (1 if self.currPlayer == self.board.evaluate() else
-            0 if self.board.evaluate() is None else
-            -1)
+        evaluation = self.board.evaluate()
+        r = (1 if self.currPlayer == evaluation else
+            0 if evaluation is None else -1)
         s1 = self.board.get(self.currPlayer)
         d = True if self.board.evaluate() is not None else False
         self.switchPlayer()
-        return r, s1, d
+        return s1, r, d
     
     def start(self):
         try:

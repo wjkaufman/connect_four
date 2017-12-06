@@ -6,14 +6,19 @@ class Board:
         self.adjacent = adjacent
     
     def get(self, playerID):
-        if playerID is 1:
-            return self.board
-        else:
-            inverted = np.copy(self.board)
-            np.place(inverted, inverted == 1, 3) # replace 1's with 3's
-            np.place(inverted, inverted == 2, 1) # replace 2's with 1's
-            np.place(inverted, inverted == 3, 2) # replace 3's with 2's
-            return inverted
+        """
+        Get a tensor representation of the board, whic would be
+        row x col x 2 (for 2 players). First slice is for the
+        current player (based on playerID), second slice is for
+        opposing player
+        """
+        b = np.zeros([2, self.board.shape[0], self.board.shape[1]])
+        b[0,:,:] = self.board == playerID
+        b[1,:,:] = self.board == (1 if playerID is 2 else 2)
+        return b
+    
+    def isFull(self):
+        return not (self.board == 0).any()
 
     # play in the nth column, playerID = {1, 2}
     # errors if it's an invalid move
