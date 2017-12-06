@@ -4,6 +4,12 @@ class Board:
     def __init__(self, dim = (6,7), adjacent = 4):
         self.board = np.zeros(dim, dtype=np.int8)
         self.adjacent = adjacent
+    
+    def get(self, playerID):
+        if playerID is 1:
+            return self.board
+        else:
+            return self.board * -1 + 3
 
     # play in the nth column, playerID = {1, 2}
     # errors if it's an invalid move
@@ -13,9 +19,9 @@ class Board:
         row = int(min(np.argwhere(np.equal(0, self.board[:, n]))))
         if row < self.board.shape[0]: # we can put another one in
             self.board[row, n] = playerID
-            return 0
+            return
         else:
-            raise ValueError('column is full, can\'t put something there')
+            raise ValueError('column is full, cannot put something there')
 
     # check if a player has won
     # return the lowest ID of the player with # adjacent in a row
@@ -29,11 +35,11 @@ class Board:
                 line = ','.join(map(str, line))
                 if run in line:
                     return playerID
-        return 0
+        return None
 
     def __repr__(self):
-        board = "---\t"*7 + "\n"
-        board += "1\t2\t3\t4\t5\t6\t7\n"
+        board = "---\t"*self.board.shape[1] + "\n"
+        board += "\t".join(map(str, [i+1 for i in range(self.board.shape[1])]))
         for i in self.board:
             line = ""
             for j in i:
