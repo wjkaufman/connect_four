@@ -2,3 +2,5 @@
 *.zip
 *.pyc
 *.DS_Store
+*.ckpt*
+checkpoint

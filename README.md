@@ -19,4 +19,4 @@ Let $x$ be the current state (board, whose move it is), and $f(x)$ be the chance
 
 ### To Do
 
--
+- Probably save the entire model, rather than just the weights (easier to reload when I want to play it)

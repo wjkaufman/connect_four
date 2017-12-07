@@ -31,10 +31,12 @@ class Board:
             return
         except:
             raise ValueError('column is full, cannot put something there')
-
-    # check if a player has won
-    # return the lowest ID of the player with # adjacent in a row
+    
     def evaluate(self):
+        """
+        check if a player has won
+        return the lowest ID of the player with # adjacent in a row
+        """
         lines = list(self.board) + list(self.board.T)
         for diagOffset in range(-self.board.shape[0],self.board.shape[1]):
             lines.append(np.diagonal(self.board, offset=diagOffset))
@@ -55,9 +57,9 @@ class Board:
                 if j == 0:
                     checker = "-"
                 elif j == 1:
-                    checker = "x"
+                    checker = "1"
                 elif j == 2:
-                    checker = "o"
+                    checker = "2"
                 else:
                     checker = " "
                 line += checker + "\t"

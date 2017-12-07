@@ -14,6 +14,11 @@ class Game:
         self.currPlayer = 1
         return self.board.get(1)
     
+    def __str__(self):
+        string = str(self.board)
+        string += "\ncurrent player is " + str(self.currPlayer)
+        return string
+    
     def switchPlayer(self):
         if self.currPlayer is 1:
             self.currPlayer = 2
@@ -31,6 +36,9 @@ class Game:
     
     def isPlayable(self):
         return not self.board.isFull()
+    
+    def getWinner(self):
+        return self.board.evaluate()
         
     
     def play(self, col):
@@ -44,9 +52,9 @@ class Game:
             col: the column to put a checker into
         
         Returns:
-            r: the reward for the state/action pair
             s1: the next state of the board from the perspective
                 of the player that just went
+            r: the reward for the state/action pair
             d: boolean, whether the game is done or not
         """
         # try:
