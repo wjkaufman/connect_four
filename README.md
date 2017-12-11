@@ -18,6 +18,8 @@ Let $x$ be the current state (board, whose move it is), and $f(x)$ be the chance
 
 I haven't a clue what's going on. I might just give this one up for now. Or switch tactics and just do a minimax/ab-pruning technique.
 
+So maybe I thought of something that will help. I realized that the computer was terrible at picking moves that weren't its top choice, so I had it try moves from its best to worst options. I also updated
+
 ### Resources
 
 - [A githob repo](https://github.com/SamRagusa/Checkers-Reinforcement-Learning)
