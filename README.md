@@ -12,6 +12,12 @@ When making an AI to play Connect Four, I think it needs to evaluate the moves i
 
 Let $x$ be the current state (board, whose move it is), and $f(x)$ be the chance player 1 wins. So it would check all available moves it has, then pick the move that maximizes its chance of winning (same as minimizing the chance it opponent wins). It could also, to improve accuracy, go to some depth $d$ down the tree, evaluate probabilities there, then pick the branch that maximizes probabilities. This is where $\alpha/\beta$ testing comes in.
 
+(12-11) So I have no clue what I'm doing, but I'm going to write out what I think is going on.
+
+- _Gradient descent problems_: meh
+
+I haven't a clue what's going on. I might just give this one up for now. Or switch tactics and just do a minimax/ab-pruning technique.
+
 ### Resources
 
 - [A githob repo](https://github.com/SamRagusa/Checkers-Reinforcement-Learning)

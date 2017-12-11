@@ -61,10 +61,22 @@ class Game:
         # try:
         self.board.play(col, self.currPlayer)
         evaluation = self.board.evaluate()
-        r = (1 if self.currPlayer == evaluation else
-            0 if evaluation is None else -1)
+        
         s1 = self.board.get(self.currPlayer)
         d = True if self.board.evaluate() is not None else False
+        
+        # want the reward to be larger if they win with fewer plays
+        # if no one has won yet
+        if evaluation is None:
+            r = 0
+        # if current player won
+        else: # self.currPlayer == evaluation:
+            r = 22 - np.sum(s1[:,:,0])
+        # if opponent won
+        # else:
+        #     r = np.sum(self.board.get()[:,:,1]) - 22
+        
+        
         self.switchPlayer()
         return s1, r, d
     
