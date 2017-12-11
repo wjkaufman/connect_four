@@ -20,3 +20,4 @@ Let $x$ be the current state (board, whose move it is), and $f(x)$ be the chance
 ### To Do
 
 - Probably save the entire model, rather than just the weights (easier to reload when I want to play it)
+- Something to try: change the reward from binary (1 if win, -1 if loss) to a numerical scale of how quickly you win or slowly you use.
